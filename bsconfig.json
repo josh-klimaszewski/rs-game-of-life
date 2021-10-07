@@ -20,8 +20,11 @@
   "suffix": ".bs.js",
   "namespace": true,
   "bs-dependencies": [
-    "reason-react"
+    "reason-react",
+    "bs-css",
+    "bs-css-emotion"
   ],
+  "ppx-flags": ["@davesnx/styled-ppx/ppx"],
   "bs-dev-dependencies": [
     "@glennsl/bs-jest",
     "bs-react-testing-library"

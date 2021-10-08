@@ -1,4 +1,4 @@
-export type state = {
+ type state = {
   grid: Game.grid,
   isPlaying: bool,
   ticks: int,
@@ -7,7 +7,7 @@ export type state = {
   frameRate: int,
 }
 
-export type action =
+ type action =
   | Random
   | Reset
   | Start

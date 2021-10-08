@@ -1,13 +1,13 @@
 module L = Belt.List
 module A = Belt.Array
 
-export type cellState =
+ type cellState =
   | Dead
   | Alive
 
-export type grid = array<array<cellState>>
+ type grid = array<array<cellState>>
 
-export type point = (int, int)
+ type point = (int, int)
 
 let safeIndex = x =>
   switch x {

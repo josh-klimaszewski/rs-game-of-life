@@ -1,7 +1,7 @@
 module R = React
 
 open Core
-open GameState
+open Model
 
 @react.component
 let make = () => {

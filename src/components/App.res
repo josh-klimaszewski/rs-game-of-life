@@ -10,7 +10,10 @@ let make = () => {
   let handleReset = R.useCallback0(_ => dispatch(Reset))
   let handleRandom = R.useCallback0(_ => dispatch(Random))
   let handleTick = R.useCallback0(_ => dispatch(Tick))
+  let handleSaveGrid = R.useCallback0(_ => dispatch(Save(state.grid)))
+  let handleLoadGrid = R.useCallback0(key => dispatch(Load(key)))
 
+  Js.log(state)
   let handleToggleAutoPlay = R.useCallback2(_ => {
     let rec play = () => {
       state.animationFrameId := Util.requestAnimationFrame(play)
@@ -33,7 +36,9 @@ let make = () => {
       onRandom=handleRandom
       onTick=handleTick
       onToggleAutoplay=handleToggleAutoPlay
+      onSaveGrid=handleSaveGrid
     />
     <Grid data=state.grid onToggle=handleToggleTile />
+    <SavedGrids grids=state.savedGrids onClick=handleLoadGrid />
   </Root>
 }

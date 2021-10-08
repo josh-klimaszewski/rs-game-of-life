@@ -14,6 +14,15 @@ module Header = %styled.div(`
   font-weight: bold;
 `)
 
+module Wrapper = %styled.div(`
+ display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 20rem;
+  padding: 2rem 0;
+`)
+
 module Icon = {
   @react.component
   let make = (~name: string) => <i className={j`fas fa-$name`} />
@@ -23,16 +32,16 @@ module Button = {
   @react.component
   let make = (~label, ~background, ~onClick, ~disabled=false, ~children) => {
     let transition = "all .15s ease-in"
-
+    let bg = disabled ? #hex("0E9D8A6") : background
     let className = %cx(`
         font-size: 0.9rem;
-        padding: 0.5rem 0.8rem;
-        background-color: $(background);
+        padding: 0.5rem;
+        background-color: $(bg);
         width: 3rem;
         height: 3rem;
         color: white;
-        border-radius: 50%;
-        margin: 0 0.5rem;
+        border-radius: 25%;
+        margin: 0.5rem;
         border-width: 0;
         user-select: none;
         outline: 0rem none white;

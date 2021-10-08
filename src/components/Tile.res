@@ -1,10 +1,10 @@
 module Wrapper = %styled.div(
   (~background, ~tileSize) =>
     `
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
     background: $(background);
-    border-radius: 50%;
+    border-radius: 40%;
     margin: 2px 1px;
     padding: 0;
     transition-property: "all";

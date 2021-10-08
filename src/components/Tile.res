@@ -1,8 +1,8 @@
 module Wrapper = %styled.div(
-  (~background, ~tileSize) =>
+  (~background) =>
     `
-    width: 12px;
-    height: 12px;
+    width: 10px;
+    height: 10px;
     background: $(background);
     border-radius: 40%;
     margin: 2px 1px;
@@ -27,9 +27,6 @@ let make = (~isAlive, ~onToggle) => {
   )
 
   <Wrapper
-    background
-    onMouseOver={handleMouseEvent(onToggle)}
-    onMouseDown={handleMouseEvent(onToggle)}
-    tileSize=Config.tileSize
+    background onMouseOver={handleMouseEvent(onToggle)} onMouseDown={handleMouseEvent(onToggle)}
   />
 }

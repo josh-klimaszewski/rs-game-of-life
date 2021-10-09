@@ -1,26 +1,26 @@
 module Root = %styled.div(`
+ width: 100vw;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100vw;
-  height: 100vh;
+`)
+module Card = %styled.div(`
+    display: flex;
+    flex-direction: column;
+    width: 26rem;
 `)
 
 module Header = %styled.div(`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-top: 2rem;
+  text-align: center;
+  padding: 2rem 0;
   font-weight: bold;
 `)
 
 module Wrapper = %styled.div(`
  display: flex;
-  justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  max-width: 20rem;
-  padding: 2rem 0;
 `)
 
 module Icon = {
@@ -66,23 +66,29 @@ module ToggleButton = {
 
 module BoardSizeInput = {
   @react.component
-  let make = (~onChange, ~value) => {
+  let make = (~onChange, ~value, ~frameRate) => {
     let inputWrapperCx = %cx(`
       display: flex;
-      flex-direction: column;
-      padding: 2rem 0
+      align-items: center;
+      justify-content: space-between;
     `)
     let labelCx = %cx(`
       font-weight: bold;
+      padding: 0 0.5rem;
     `)
     let inputCx = %cx(`
-      border: 0.25rem solid #222;
-      border-radius: 0.25rem;
-      width: 3rem;
+      border: 0.2rem solid #222;
+      border-radius: 0.2rem;
+      width: 2rem;
+      height: 1rem;
+      text-align: center;
+      margin: 0 0.5rem;
     `)
     <div className=inputWrapperCx>
-      <p className=labelCx> {"Board size"->React.string} </p>
-      <input className=inputCx onChange type_="number" value />
+      <p className=labelCx>
+        {"Board size"->React.string} <input className=inputCx onChange type_="number" value />
+      </p>
+      <p className=labelCx> {`Frame rate: ${frameRate->Belt.Int.toString} fps`->React.string} </p>
     </div>
   }
 }

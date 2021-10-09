@@ -10,10 +10,9 @@ let make = () => {
   let handleReset = R.useCallback0(_ => dispatch(Reset))
   let handleRandom = R.useCallback0(_ => dispatch(Random))
   let handleTick = R.useCallback0(_ => dispatch(Tick))
-  let handleSaveGrid = R.useCallback0(_ => dispatch(Save(state.grid)))
+  let handleSaveGrid = R.useCallback1(_ => dispatch(Save(state.grid)), [state.grid])
   let handleLoadGrid = R.useCallback0(key => dispatch(Load(key)))
 
-  Js.log(state)
   let handleToggleAutoPlay = R.useCallback2(_ => {
     let rec play = () => {
       state.animationFrameId := Util.requestAnimationFrame(play)

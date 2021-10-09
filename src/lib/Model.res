@@ -38,8 +38,6 @@ module Reducers = {
     | Tick => Game.nextGeneration(self)
     | Toggle(position) => self->Game.toggleTile(position)
     | Load(key) => state.savedGrids[key]
-    // | Save(grid) => self->
-    // | Save(grid) =>
     | _ => self
     }
 

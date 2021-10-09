@@ -1,5 +1,6 @@
 type state = {
   grid: Game.grid,
+  boardSize: int,
   isPlaying: bool,
   ticks: int,
   animationFrameId: ref<int>,
@@ -17,11 +18,13 @@ type action =
   | Toggle(Game.point)
   | Save(Game.grid)
   | Load(int)
+  | BoardSize(int)
 
 let makeSeed = () => Js.Date.now()->int_of_float
 
 let initialState = {
   grid: Game.makeRandomGrid(Config.boardSize, makeSeed()),
+  boardSize: Config.boardSize,
   isPlaying: false,
   ticks: 0,
   animationFrameId: ref(0),
@@ -33,11 +36,19 @@ let initialState = {
 module Reducers = {
   let grid = (self, action, state): Game.grid =>
     switch action {
-    | Random => Game.makeRandomGrid(Config.boardSize, makeSeed())
-    | Reset => Game.makeBlankGrid(Config.boardSize)
+    | Random => Game.makeRandomGrid(state.boardSize, makeSeed())
+    | Reset => Game.makeBlankGrid(state.boardSize)
     | Tick => Game.nextGeneration(self)
     | Toggle(position) => self->Game.toggleTile(position)
     | Load(key) => state.savedGrids[key]
+    | BoardSize(size) => Game.makeBlankGrid(size)
+    | _ => self
+    }
+
+  let boardSize = (self, action, state): int =>
+    switch action {
+    | BoardSize(size) => size
+    | Load(key) => state.savedGrids[key]->Js.Array.length
     | _ => self
     }
 
@@ -79,6 +90,7 @@ module Reducers = {
   let root = (state, action) => {
     animationFrameId: state.animationFrameId,
     grid: grid(state.grid, action, state),
+    boardSize: boardSize(state.boardSize, action, state),
     isPlaying: isPlaying(state.isPlaying, action, state),
     startedAt: startedAt(state.startedAt, action, state),
     ticks: ticks(state.ticks, action, state),

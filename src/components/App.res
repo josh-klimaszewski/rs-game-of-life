@@ -12,6 +12,13 @@ let make = () => {
   let handleTick = R.useCallback0(_ => dispatch(Tick))
   let handleSaveGrid = R.useCallback1(_ => dispatch(Save(state.grid)), [state.grid])
   let handleLoadGrid = R.useCallback0(key => dispatch(Load(key)))
+  let handleChangeBoardSize = R.useCallback0(event => {
+    let intVal = ReactEvent.Form.currentTarget(event)["value"]->int_of_string
+    switch intVal > Config.boardSize {
+    | true => dispatch(BoardSize(Config.boardSize))
+    | false => dispatch(BoardSize(intVal))
+    }
+  })
 
   let handleToggleAutoPlay = R.useCallback2(_ => {
     let rec play = () => {
@@ -37,6 +44,7 @@ let make = () => {
       onToggleAutoplay=handleToggleAutoPlay
       onSaveGrid=handleSaveGrid
     />
+    <BoardSizeInput onChange={handleChangeBoardSize} value={state.boardSize->Belt.Int.toString} />
     <Grid data=state.grid onToggle=handleToggleTile />
     <SavedGrids grids=state.savedGrids onClick=handleLoadGrid />
   </Root>

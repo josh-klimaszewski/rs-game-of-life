@@ -63,3 +63,26 @@ module ToggleButton = {
     <Button label background onClick disabled> <Icon name /> </Button>
   }
 }
+
+module BoardSizeInput = {
+  @react.component
+  let make = (~onChange, ~value) => {
+    let inputWrapperCx = %cx(`
+      display: flex;
+      flex-direction: column;
+      padding: 2rem 0
+    `)
+    let labelCx = %cx(`
+      font-weight: bold;
+    `)
+    let inputCx = %cx(`
+      border: 0.25rem solid #222;
+      border-radius: 0.25rem;
+      width: 3rem;
+    `)
+    <div className=inputWrapperCx>
+      <p className=labelCx> {"Board size"->React.string} </p>
+      <input className=inputCx onChange type_="number" value />
+    </div>
+  }
+}

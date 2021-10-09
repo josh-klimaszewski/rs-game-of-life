@@ -1,6 +1,6 @@
 {
   "name": "rs-game-of-life",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "homepage": "https://josh-klimaszewski.github.io/rs-game-of-life",
   "private": true,
   "dependencies": {
